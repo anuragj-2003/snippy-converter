@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to Word Converter</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='pdfToword.css') }}">
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>PDF to Word Converter</h1>
+        <form id="uploadForm" enctype="multipart/form-data" action="/convert" method="post">
+            <label for="fileInput" class="custom-file-upload">
+                Choose PDF
+            </label>
+            <input type="file" name="file" id="fileInput" accept=".pdf, .docx">
+            <button type="submit">Convert to Word</button>
+            <div id="uploadStatus" style="display: none;">File uploaded successfully!</div>
+
+        </form>
+        <div id="output"></div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
+<script>
+    const fileInput = document.getElementById('fileInput');
+    const uploadStatus = document.getElementById('uploadStatus');
+
+    fileInput.addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            uploadStatus.style.display = 'block'; // Show the upload status
+            setTimeout(() => {
+                uploadStatus.style.display = 'none'; // Hide the upload status after 3 seconds
+            }, 3000); // 3000 milliseconds = 3 seconds
+        }
+    }); 
+</script>
